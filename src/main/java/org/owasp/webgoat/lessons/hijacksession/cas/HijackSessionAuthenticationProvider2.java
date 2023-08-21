@@ -50,6 +50,7 @@ public class HijackSessionAuthenticationProvider2 implements AuthenticationProvi
     private Queue<String> sessions = new LinkedList<>();
     private static long id = new Random().nextLong() & Long.MAX_VALUE;
     protected static final int MAX_SESSIONS = 50;
+    
 
     private static final DoublePredicate PROBABILITY_DOUBLE_PREDICATE = pr -> pr < 0.75;
     private static final Supplier<String> GENERATE_SESSION_ID = () -> ++id + "-" + Instant.now().toEpochMilli();
@@ -60,6 +61,7 @@ public class HijackSessionAuthenticationProvider2 implements AuthenticationProvi
 
     @Override
     public Authentication authenticate(Authentication authentication) {
+        new Random().nextLong();
         if (authentication == null) {
             return AUTHENTICATION_SUPPLIER.get();
         }
